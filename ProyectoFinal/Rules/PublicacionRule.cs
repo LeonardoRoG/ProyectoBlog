@@ -6,9 +6,14 @@ namespace ProyectoFinal.Rules
 {
     public class PublicacionRule
     {
+        private readonly IConfiguration _configuration;
+        public PublicacionRule(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public Publicacion GetOnePostRandom()
         {
-            var connectionString = @"Server=DESKTOP-119RNS3\SQLEXPRESS;Database=BlogDataBase;Trusted_Connection=True"; // Luego va a appsettings.json
+            var connectionString = _configuration.GetConnectionString("BlogDataBase");
 
             using var connection = new SqlConnection(connectionString); // Usa System.Sql
             {

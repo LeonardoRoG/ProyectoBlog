@@ -3,6 +3,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+string dev = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNETCORE_USER")) ? "Ale" : Environment.GetEnvironmentVariable("ASPNETCORE_USER");
+builder.Configuration.AddJsonFile($"appsettings.{dev}.json");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
