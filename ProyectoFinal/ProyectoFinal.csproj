@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\assets\favicon.ico" />
+    <Content Remove="wwwroot\assets\img\about-bg.jpg" />
+    <Content Remove="wwwroot\assets\img\contact-bg.jpg" />
+    <Content Remove="wwwroot\assets\img\home-bg.jpg" />
+    <Content Remove="wwwroot\assets\img\post-bg.jpg" />
+    <Content Remove="wwwroot\assets\img\post-sample-image.jpg" />
+    <Content Remove="wwwroot\css\styles.css" />
+    <Content Remove="wwwroot\js\scripts.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\favicon.ico" />
+    <None Include="wwwroot\assets\img\about-bg.jpg" />
+    <None Include="wwwroot\assets\img\contact-bg.jpg" />
+    <None Include="wwwroot\assets\img\home-bg.jpg" />
+    <None Include="wwwroot\assets\img\post-bg.jpg" />
+    <None Include="wwwroot\assets\img\post-sample-image.jpg" />
+    <None Include="wwwroot\css\styles.css" />
+    <None Include="wwwroot\js\scripts.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.28" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+</Project>
