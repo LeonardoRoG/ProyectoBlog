@@ -11,7 +11,7 @@ namespace ProyectoFinal.Rules
         {
             _configuration = configuration;
         }
-        // Devuelve un solo post --> Modificar para que devuelva un post aleatorio <--
+        // Devuelve un solo post aleatorio:
         public Publicacion GetOnePostRandom()
         {
             var connectionString = _configuration.GetConnectionString("BlogDataBase");
@@ -20,13 +20,13 @@ namespace ProyectoFinal.Rules
             {
                 // Abro la conexion y pido mediante una consulta con Dapper los datos que luego se transforman en el objeto
                 connection.Open();
-                var post = connection.Query<Publicacion>("SELECT TOP 1 * FROM Publicacion"); // Usando Dapper, devuelve IEnumerable
-
+                var post = connection.Query<Publicacion>("SELECT TOP 1 * FROM Publicacion ORDER BY NEWID()"); // Usando Dapper, devuelve IEnumerable
+                // La consulta anterior devuelve la primera fila de la tabla ordenada de forma aleatoria
                 return post.First(); // Se coloca First() para que devuelva el primer item de la lista
             }
 
         }
-        // Este método devuelve 4 posts de la BD ordenados del más reciente al mas antiguo
+        // Este método devuelve 4 posts de la BD ordenados del más reciente al mas antiguo:
         public List<Publicacion> GetPostsHome()
         {
             var connectionString = _configuration.GetConnectionString("BlogDataBase");
@@ -41,7 +41,7 @@ namespace ProyectoFinal.Rules
             }
 
         }
-
+        // Obtener un post, indicado por su id:
         internal Publicacion GetPostById(int id)
         {
             var connectionString = _configuration.GetConnectionString("BlogDataBase");

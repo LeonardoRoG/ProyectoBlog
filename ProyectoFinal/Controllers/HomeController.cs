@@ -22,9 +22,7 @@ namespace ProyectoFinal.Controllers
             var post = rule.GetPostById(id);
             if (post == null)
             {
-                //return NotFound(); // ----->>> HACER PAGINA 404
-                var posts = rule.GetPostsHome();
-                return View(posts);
+                return NotFound(); // ----->>> HACER PAGINA 404
             }
             return View(post);
         }
