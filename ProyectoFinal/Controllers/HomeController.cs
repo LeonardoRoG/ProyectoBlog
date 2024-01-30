@@ -46,6 +46,23 @@ namespace ProyectoFinal.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Contacto(Contacto contacto)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("Contacto", contacto);
+            }
+            var rule = new ContactoRule(_configuration);
+            var mensaje = @"<h1>Gracias por contactarse</h1>
+                        <p>Hemos recibido su correo exitosamente.</p>
+                        <p>A la brevedad nos pondremos en contacto.</p>
+                        <hr/><p>Saludos</p><p><b>Proyecto Blog</b></p>";
+            rule.SendEmail(contacto.Email,mensaje, "Mensaje Recibido", "Proyecto Blog", null); // Mensaje enviado al cliente
+            rule.SendEmail("micorreo@mail.com", contacto.Mensaje, "Nuevo Mensaje", contacto.Nombre, contacto.Email); // Mensaje de aviso de nuevo contacto
+
+            return View("Contacto");
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
