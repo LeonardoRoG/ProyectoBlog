@@ -41,5 +41,20 @@ namespace ProyectoFinal.Rules
             }
 
         }
+
+        internal Publicacion GetPostById(int id)
+        {
+            var connectionString = _configuration.GetConnectionString("BlogDataBase");
+
+            using var connection = new SqlConnection(connectionString); // Usa System.Sql
+            {
+                // Abro la conexion y pido mediante una consulta con Dapper los datos que luego se transforman en el objeto
+                connection.Open();
+                var query = "SELECT * FROM Publicacion WHERE Id = @id"; // Consulta de SQL que será enviada
+                var post = connection.QueryFirstOrDefault<Publicacion>(query, new { id }); // Usando Dapper, devuelve IEnumerable, el primer parámetro es la consulta y el segundo es la variable
+
+                return post; // Se coloca First() para que devuelva una lista en vez de un IEnumerable
+            }
+        }
     }
 }
