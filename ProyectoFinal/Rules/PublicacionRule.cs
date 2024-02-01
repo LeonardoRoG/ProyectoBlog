@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using ProyectoFinal.Models;
 using System.Data.SqlClient;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ProyectoFinal.Rules
 {
@@ -54,6 +55,26 @@ namespace ProyectoFinal.Rules
                 var post = connection.QueryFirstOrDefault<Publicacion>(query, new { id }); // Usando Dapper, devuelve IEnumerable, el primer parámetro es la consulta y el segundo es la variable
 
                 return post; // Se coloca First() para que devuelva una lista en vez de un IEnumerable
+            }
+        }
+
+        public void InsertPost(Publicacion data)
+        {
+            var connectionString = _configuration.GetConnectionString("BlogDataBase");
+
+            using var connection = new SqlConnection(connectionString);
+            {
+                connection.Open();
+
+                var queryInsert = "INSERT INTO Publicacion(Titulo, SubTitulo, Creador, Imagen, Cuerpo) VALUES(@titulo, @subtitulo, @creador, @imagen, @cuerpo)";
+                var result = connection.Execute(queryInsert, new
+                {
+                    titulo = data.Titulo,
+                    subTitulo = data.SubTitulo,
+                    creador = data.Creador,
+                    imagen = data.Imagen,
+                    cuerpo = data.Cuerpo,
+                });
             }
         }
     }

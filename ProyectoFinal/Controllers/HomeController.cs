@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoFinal.Models;
 using ProyectoFinal.Rules;
@@ -26,6 +27,24 @@ namespace ProyectoFinal.Controllers
             }
             return View(post);
         }
+
+        [Authorize] // Permite o no su uso segun el login - Puede ponerse a nivel de controlador o de accion
+        public IActionResult Nuevo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize] // Permite o no su uso segun el login - Puede ponerse a nivel de controlador o de accion
+        public IActionResult Add(Publicacion data)
+        {
+            var rule = new PublicacionRule(_configuration);
+            rule.InsertPost(data);
+            
+            return RedirectToAction("Index");
+        }
+
+        //[AllowAnonymous] // Permite que cualquiera sin estar logeado pueda acceder
         public IActionResult Index()
         {
             var rule = new PublicacionRule(_configuration);
