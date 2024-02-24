@@ -40,7 +40,7 @@ namespace ProyectoFinal.Controllers
         {
             var rule = new PublicacionRule(_configuration);
             rule.InsertPost(data);
-            
+
             return RedirectToAction("Index");
         }
 
@@ -49,6 +49,14 @@ namespace ProyectoFinal.Controllers
         {
             var rule = new PublicacionRule(_configuration);
             var posts = rule.GetPostsHome();
+            return View(posts);
+        }
+
+        public IActionResult Publicaciones(int cant = 5, int pagina = 0)
+        {
+            var rule = new PublicacionRule(_configuration);
+            var posts = rule.GetPublicaciones(cant, pagina);
+
             return View(posts);
         }
         public IActionResult Suerte()
